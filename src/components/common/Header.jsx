@@ -13,8 +13,7 @@ const Header = () => {
         { label: "About" },
         { label: "Services" },
         { label: "Portfolio" },
-        { label: "Archive" },
-        { label: "ContactUs" },
+        { label: "Contacts" },
     ];
 
     const handleNavigation = (label) => {

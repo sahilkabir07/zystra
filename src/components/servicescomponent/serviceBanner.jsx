@@ -20,7 +20,7 @@ const childVariants = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const ServiceBanner = () => {
+const ServicesBanner = () => {
     return (
         <section className="relative min-h-screen flex items-center justify-center px-6 py-24 z-20">
             <motion.div
@@ -64,4 +64,4 @@ const ServiceBanner = () => {
     );
 };
 
-export default ServiceBanner;
+export default ServicesBanner;

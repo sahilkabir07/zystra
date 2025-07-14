@@ -1,8 +1,13 @@
 import React from 'react'
+import ContactUsBanner from '../components/contactComponents/ContactUsBanner'
+import DiagonalContactCards from '../components/contactComponents/DiagonalCards'
 
 const Contacts = () => {
     return (
-        <div>Contacts</div>
+        <>
+            <ContactUsBanner />
+            <DiagonalContactCards />
+        </>
     )
 }
 

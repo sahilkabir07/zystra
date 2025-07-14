@@ -21,18 +21,14 @@ const ServiceCard = ({ icon: Icon, title, description, points }) => {
                        hover:shadow-[0_0_30px_6px_rgba(138,43,226,0.3)] hover:scale-105 
                        transition-all duration-300 will-change-transform"
         >
-            {/* Icon */}
             <div className="text-purple-500 text-4xl mb-4">
                 <Icon />
             </div>
 
-            {/* Title */}
             <h3 className="text-xl font-semibold mb-2">{title}</h3>
 
-            {/* Description */}
             <p className="text-white/80 mb-4">{description}</p>
 
-            {/* Bullet Points */}
             <ul className="text-sm space-y-1 text-purple-300 list-disc list-inside">
                 {points.map((point, i) => (
                     <li key={i}>{point}</li>

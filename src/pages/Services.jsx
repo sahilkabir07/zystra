@@ -1,12 +1,13 @@
 import React from 'react'
-import ServiceBanner from '../components/servicescomponent/serviceBanner'
-import ServicesSection from '../components/servicescomponent/servicesSection'
+import ServicesSection from '../components/homeComponents/ServiceSection'
+import ServicesBanner from '../components/servicescomponent/serviceBanner'
+
 
 
 const Services = () => {
     return (
         <>
-            <ServiceBanner />
+            <ServicesBanner />
             <ServicesSection />
         </>
     )

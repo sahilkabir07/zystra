@@ -10,17 +10,18 @@ import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import BackgroundVideo from "./components/common/Background";
 import GlobalLoader from "./components/common/GlobalLoader";
+import Portfolio from "./pages/Portfolio";
 
 const App = () => {
   const [showLoader, setShowLoader] = useState(true);
-  const isFirstLoad = useRef(true); // track only 1st full page load
+  const isFirstLoad = useRef(true);
 
   useEffect(() => {
     if (isFirstLoad.current) {
       const timer = setTimeout(() => setShowLoader(false), 2500);
       return () => clearTimeout(timer);
     } else {
-      setShowLoader(false); // if already loaded once, skip loader
+      setShowLoader(false);
     }
     isFirstLoad.current = false;
   }, []);
@@ -35,8 +36,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contacts />} />
+            <Route path="/contacts" element={<Contacts />} />
             <Route path="/about" element={<About />} />
+            <Route path="/portfolio" element={<Portfolio />} />
           </Routes>
           <Footer />
         </Router>

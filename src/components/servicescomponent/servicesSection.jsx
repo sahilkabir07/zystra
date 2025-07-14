@@ -1,7 +1,6 @@
-// src/components/ServicesSection.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { FaShareAlt, FaBullseye, FaSearch, FaMapMarkerAlt, FaPenNib, FaChartBar } from "react-icons/fa";
+import { FaShareAlt, FaBullseye, FaSearch, FaMapMarkerAlt, FaCode, FaMobileAlt } from "react-icons/fa";
 
 const services = [
     {
@@ -29,23 +28,23 @@ const services = [
         icon: <FaMapMarkerAlt className="text-purple-500 text-4xl mb-4" />,
     },
     {
-        title: "Content Marketing",
-        description: "Engaging content that tells your brand story and drives conversions.",
-        points: ["Content Strategy", "Blog Writing", "Email Marketing", "Copywriting"],
-        icon: <FaPenNib className="text-purple-500 text-4xl mb-4" />,
+        title: "Web Development",
+        description: "Modern and responsive websites tailored to your business needs.",
+        points: ["Responsive Design", "Frontend & Backend", "SEO Optimization", "Performance Tuning"],
+        icon: <FaCode className="text-purple-500 text-4xl mb-4" />,
     },
     {
-        title: "Web Analytics",
-        description: "Data-driven insights to optimize your digital marketing efforts.",
-        points: ["Performance Tracking", "User Behavior", "Conversion Analysis", "ROI Reporting"],
-        icon: <FaChartBar className="text-purple-500 text-4xl mb-4" />,
+        title: "App Development",
+        description: "High-performance mobile applications for Android and iOS platforms.",
+        points: ["Cross-Platform Apps", "UI/UX Design", "API Integration", "App Store Deployment"],
+        icon: <FaMobileAlt className="text-purple-500 text-4xl mb-4" />,
     },
+
 ];
 
 const ServicesSection = () => {
     return (
         <section className="relative py-24 px-6 md:px-12 z-10">
-            {/* Background Video */}
             <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
                 <video
                     className="w-full h-full object-cover opacity-20"
@@ -53,12 +52,11 @@ const ServicesSection = () => {
                     muted
                     loop
                     playsInline
-                    src="/videos/bg.mp4" // update to your actual path
+                    src="/videos/bg.mp4"
                 />
                 <div className="absolute inset-0 bg-black opacity-50"></div>
             </div>
 
-            {/* Section Title */}
             <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -69,7 +67,6 @@ const ServicesSection = () => {
                 Our Services
             </motion.h2>
 
-            {/* Cards */}
             <div className="relative z-10 max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
                 {services.map((service, index) => (
                     <motion.div
