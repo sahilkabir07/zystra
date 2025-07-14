@@ -1,6 +1,5 @@
 import React from 'react'
-import PortfolioBanner from '../components/portfolioComponents/portfolioBanner'
-
+import PortfolioBanner from '../components/portfolioComp/PortfolioBanner'
 
 const Portfolio = () => {
     return (
