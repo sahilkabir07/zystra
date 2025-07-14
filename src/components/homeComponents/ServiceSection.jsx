@@ -29,7 +29,7 @@ const services = [
     },
 ];
 
-const ServicesSection = () => {
+const ServicesSectionHome = () => {
     return (
         <section className="relative z-10 py-20 px-6">
             <div className="relative z-20 max-w-6xl mx-auto text-center backdrop-blur-[2px] bg-black/50 rounded-xl p-6">
@@ -62,4 +62,4 @@ const ServicesSection = () => {
     );
 };
 
-export default ServicesSection;
+export default ServicesSectionHome;

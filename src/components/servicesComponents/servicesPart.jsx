@@ -42,7 +42,7 @@ const services = [
 
 ];
 
-const ServicesSection = () => {
+const ServicesPart = () => {
     return (
         <section className="relative py-24 px-6 md:px-12 z-10">
             <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
@@ -94,4 +94,4 @@ const ServicesSection = () => {
     );
 };
 
-export default ServicesSection;
+export default ServicesPart;

@@ -1,6 +1,7 @@
 import React from 'react'
-import ServicesSection from '../components/homeComponents/ServiceSection'
-import ServicesBanner from '../components/servicescomponent/serviceBanner'
+import ServicesBanner from '../components/servicesComponents/servicesBanner'
+import ServicesPart from '../components/servicesComponents/servicesPart'
+
 
 
 
@@ -8,7 +9,7 @@ const Services = () => {
     return (
         <>
             <ServicesBanner />
-            <ServicesSection />
+            <ServicesPart />
         </>
     )
 }
