@@ -1,32 +1,34 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaCheckCircle } from "react-icons/fa";
 
-const ServiceCard = ({ title, description, delay = 0 }) => {
+const StatCard = ({ icon: Icon, count, label, index }) => {
     return (
         <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            initial={{ x: -60, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{
-                duration: 0.4,
-                delay,
-                ease: "easeOut",
+                duration: 0.6,
+                delay: index * 0.15,
+                ease: [0.25, 1, 0.5, 1],
             }}
-            viewport={{ once: true, amount: 0.2 }}
             whileHover={{
-                scale: 1.04,
-                transition: { duration: 0.05, ease: "easeInOut" },
+                scale: 1.05,
+                transition: { duration: 0.2 },
             }}
-            className="bg-white/10 backdrop-blur-[6px] border border-purple-500/30 rounded-xl px-8 py-10 text-white w-full sm:w-[360px] min-h-[260px] shadow-md z-10
-            hover:shadow-[0_0_25px_5px_rgba(168,85,247,0.4)] transition-all duration-200 flex items-center justify-center text-center"
+            className="backdrop-blur-[2px] bg-white/10 border border-white/20 rounded-2xl shadow-lg w-full max-w-sm min-h-[240px] text-white p-6 flex items-center justify-center"
         >
-            <div className="flex flex-col items-center gap-3">
-                <FaCheckCircle className="text-purple-400 text-2xl" />
-                <h3 className="text-lg font-semibold">{title}</h3>
-                <p className="text-sm text-white/80">{description}</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+                <div className="bg-purple-600/30 p-3 rounded-full text-purple-400">
+                    <Icon className="text-3xl" />
+                </div>
+                <div>
+                    <h2 className="text-4xl font-bold bg-gradient-to-r from-white to-purple-900 bg-clip-text text-transparent">{count}</h2>
+                    <p className="text-white/80 text-sm sm:text-base">{label}</p>
+                </div>
             </div>
         </motion.div>
     );
 };
 
-export default ServiceCard;
+export default StatCard;

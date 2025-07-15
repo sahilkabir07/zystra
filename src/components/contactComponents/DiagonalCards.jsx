@@ -1,63 +1,86 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
+    FaPhone,
     FaEnvelope,
-    FaPhoneAlt,
     FaMapMarkerAlt,
 } from "react-icons/fa";
 
-const cards = [
+const contactData = [
     {
-        icon: <FaEnvelope />,
-        title: "Email Us",
-        info: "hello@zystratech.com",
+        icon: <FaPhone />,
+        label: "Call Us",
+        info: "+91 98765 43210",
+        direction: "left",
     },
     {
-        icon: <FaPhoneAlt />,
-        title: "Call Us",
-        info: "+1 (555) 123-4567",
+        icon: <FaEnvelope />,
+        label: "Mail Us",
+        info: "info@zystra.com",
+        direction: "down",
     },
     {
         icon: <FaMapMarkerAlt />,
-        title: "Visit Us",
-        info: "123 Digital Avenue, Tech City",
+        label: "Visit Us",
+        info: "Delhi, India",
+        direction: "right",
     },
 ];
 
+const getMotionOffset = (direction, show) => {
+    const base = { opacity: show ? 1 : 0 };
+    const offset = 50;
+    switch (direction) {
+        case "left":
+            return { ...base, x: show ? -offset : 0, y: show ? offset : 0 };
+        case "right":
+            return { ...base, x: show ? offset : 0, y: show ? offset : 0 };
+        case "down":
+        default:
+            return { ...base, x: 0, y: show ? offset : 0 };
+    }
+};
+
 const DiagonalContactCards = () => {
     return (
-        <div className="w-full py-16 px-6 md:px-12 bg-black text-white z-10">
-            <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-                {cards.map((card, i) => (
-                    <motion.div
-                        key={i}
-                        whileHover="hover"
-                        initial="rest"
-                        animate="rest"
-                        className="relative group bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-8 overflow-hidden cursor-pointer transition-all duration-300 shadow-md h-[220px] flex flex-col justify-center items-center"
-                    >
-                        {/* Sliding up info card from bottom */}
-                        <motion.div
-                            variants={{
-                                rest: { y: 100, opacity: 0 },
-                                hover: { y: 0, opacity: 1 },
-                            }}
-                            transition={{ duration: 0.4, ease: "easeInOut" }}
-                            className="absolute bottom-4 w-[90%] h-[90px] bg-white/10 backdrop-blur-md border border-white/20 rounded-xl z-10 flex items-center justify-center text-center px-4 text-sm text-white shadow-lg"
-                        >
-                            {card.info}
-                        </motion.div>
+        <div className="min-h-screen flex justify-center items-center gap-8 px-4 py-20 flex-wrap bg-transparent">
+            {contactData.map((item, index) => (
+                <DiagonalCard key={index} {...item} />
+            ))}
+        </div>
+    );
+};
 
-                        {/* Foreground icon and title */}
-                        <div className="z-20 flex flex-col items-center gap-3">
-                            <div className="text-4xl text-purple-500 drop-shadow-[0_0_8px_rgba(138,43,226,0.6)] transition-transform duration-300 group-hover:scale-110">
-                                {card.icon}
-                            </div>
-                            <h3 className="text-lg font-semibold text-white">{card.title}</h3>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
+const DiagonalCard = ({ icon, label, info, direction }) => {
+    const [hovered, setHovered] = useState(false);
+
+    return (
+        <div
+            className="relative group"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            <motion.div
+                className="w-40 h-40 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-xl flex flex-col items-center justify-center text-white transition-all duration-300 hover:shadow-[0_0_30px_10px_rgba(138,43,226,0.3)]"
+            >
+                <div className="text-3xl text-purple-500 drop-shadow-[0_0_10px_rgba(138,43,226,0.6)] mb-2">
+                    {icon}
+                </div>
+                <div className="text-sm font-semibold bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">
+                    {label}
+                </div>
+            </motion.div>
+
+            <motion.div
+                initial={{ opacity: 0, x: 0, y: 0 }}
+                animate={getMotionOffset(direction, hovered)}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 z-10`}
+            >
+                <div className="w-32 h-32 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md text-white text-center text-sm flex items-center justify-center shadow-md pointer-events-none">
+                    {info}
+                </div>
+            </motion.div>
         </div>
     );
 };
