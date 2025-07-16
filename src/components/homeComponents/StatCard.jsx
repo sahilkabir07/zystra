@@ -1,40 +1,26 @@
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const StatCard = ({ icon: Icon, count, label, index }) => {
-    const prefersReducedMotion = useReducedMotion();
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-
     return (
         <motion.div
-            initial={prefersReducedMotion ? false : { x: -60, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{
-                duration: isMobile ? 0.4 : 0.6,
-                delay: index * 0.15,
-                ease: [0.25, 1, 0.5, 1],
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut",
             }}
-            whileHover={
-                !isMobile
-                    ? {
-                        scale: 1.08,
-                        transition: { duration: 0.1, ease: "easeOut" },
-                        boxShadow: "0 0 30px 8px rgba(138,43,226,0.4)",
-                    }
-                    : {}
-            }
-            className="backdrop-blur-[2px] backdrop-filter bg-white/10 border border-white/20 rounded-2xl shadow-2xl w-full sm:w-[360px] min-h-[280px] text-white transition-transform duration-200 flex items-center justify-center"
+            className="backdrop-blur-[2px] bg-white/10 border border-white/20 rounded-2xl shadow-xl w-full sm:w-[360px] min-h-[260px] text-white flex items-center justify-center transition-transform duration-200 hover:scale-[1.03]"
         >
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center gap-4">
                 <div className="bg-purple-600/30 p-3 rounded-full text-purple-400">
                     <Icon className="text-3xl" />
                 </div>
                 <div>
-                    <h2 className="text-6xl font-bold bg-gradient-to-r from-white to-purple-900 bg-clip-text text-transparent">
-                        {count}
-                    </h2>
-                    <p className="text-white/80 text-shadow-md">{label}</p>
+                    <h2 className="text-5xl font-bold bg-gradient-to-r from-white to-purple-900 bg-clip-text text-transparent">{count}</h2>
+                    <p className="text-white/80 text-base">{label}</p>
                 </div>
             </div>
         </motion.div>
