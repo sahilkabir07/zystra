@@ -38,7 +38,8 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
 
     return (
         <div
-            className="relative group"
+            className={`relative group transition-all duration-300 ${isMobile && hovered ? "mb-48" : "mb-6"
+                }`}
             onMouseEnter={() => !isMobile && setHovered(true)}
             onMouseLeave={() => !isMobile && setHovered(false)}
             onClick={() => isMobile && setHovered(prev => !prev)}
@@ -66,7 +67,6 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
                     <div className="text-sm font-semibold bg-gradient-to-r from-white to-purple-500 bg-clip-text text-transparent">
                         {info}
                     </div>
-
                 </div>
             </motion.div>
         </div>
