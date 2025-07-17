@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaTrash } from "react-icons/fa";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
@@ -55,13 +57,55 @@ const ContactForm = () => {
         setFileName("");
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+
+        const payload = new FormData();
+        Object.entries(formData).forEach(([key, value]) => {
+            if (value) payload.append(key, value);
+        });
+
+        try {
+            await axios.post("http://localhost:5000/api/contact/submit", payload, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            toast.success("✅ Message submitted successfully!");
+
+            // Reset form
+            setFormData({
+                name: "",
+                company: "",
+                email: "",
+                phone: "",
+                purpose: "",
+                description: "",
+                file: null,
+            });
+            setFileName("");
+        } catch (err) {
+            console.error("❌ Error submitting form:", err);
+            toast.error("❌ Failed to submit form. Try again.");
+        }
     };
 
     return (
         <section className="relative flex justify-center items-center px-4 py-20 z-10">
+            <Toaster
+                position="top-center"
+                toastOptions={{
+                    style: {
+                        background: "#1e1b4b",
+                        color: "#fff",
+                        border: "1px solid #7c3aed",
+                    },
+                    iconTheme: {
+                        primary: "#a78bfa",
+                        secondary: "#1e1b4b",
+                    },
+                }}
+            />
+
             <motion.form
                 variants={formVariants}
                 initial="hidden"
@@ -83,6 +127,7 @@ const ContactForm = () => {
                         type="text"
                         name="name"
                         placeholder="Your Name"
+                        value={formData.name}
                         onChange={handleChange}
                         required
                         className="bg-white/10 border border-white/40 text-white placeholder-white/60 rounded-xl px-4 py-3 backdrop-blur-md shadow-[0_0_10px_rgba(255,255,255,0.1)] focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-500 transition-all duration-300 hover:border-white/60"
@@ -92,6 +137,7 @@ const ContactForm = () => {
                         type="text"
                         name="company"
                         placeholder="Company Name"
+                        value={formData.company}
                         onChange={handleChange}
                         className="bg-white/10 border border-white/40 text-white placeholder-white/60 rounded-xl px-4 py-3 backdrop-blur-md shadow-[0_0_10px_rgba(255,255,255,0.1)] focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-500 transition-all duration-300 hover:border-white/60"
                     />
@@ -100,6 +146,7 @@ const ContactForm = () => {
                         type="email"
                         name="email"
                         placeholder="Email"
+                        value={formData.email}
                         onChange={handleChange}
                         required
                         className="bg-white/10 border border-white/40 text-white placeholder-white/60 rounded-xl px-4 py-3 backdrop-blur-md shadow-[0_0_10px_rgba(255,255,255,0.1)] focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-500 transition-all duration-300 hover:border-white/60"
@@ -109,6 +156,7 @@ const ContactForm = () => {
                         type="tel"
                         name="phone"
                         placeholder="Phone Number"
+                        value={formData.phone}
                         onChange={handleChange}
                         className="bg-white/10 border border-white/40 text-white placeholder-white/60 rounded-xl px-4 py-3 backdrop-blur-md shadow-[0_0_10px_rgba(255,255,255,0.1)] focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-500 transition-all duration-300 hover:border-white/60"
                     />
@@ -119,6 +167,7 @@ const ContactForm = () => {
                     type="text"
                     name="purpose"
                     placeholder="Purpose"
+                    value={formData.purpose}
                     onChange={handleChange}
                     className="bg-white/10 border border-white/40 text-white placeholder-white/60 rounded-xl px-4 py-3 backdrop-blur-md shadow-[0_0_10px_rgba(255,255,255,0.1)] focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-500 transition-all duration-300 hover:border-white/60"
                 />
@@ -128,6 +177,7 @@ const ContactForm = () => {
                     name="description"
                     placeholder="Description"
                     rows="4"
+                    value={formData.description}
                     onChange={handleChange}
                     className="bg-white/10 border border-white/40 text-white placeholder-white/60 rounded-xl px-4 py-3 backdrop-blur-md shadow-[0_0_10px_rgba(255,255,255,0.1)] focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-500 transition-all duration-300 hover:border-white/60 resize-none"
                 />
