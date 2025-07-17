@@ -34,7 +34,7 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
     }, []);
 
     useEffect(() => {
-        if (isMobile) setHovered(false); // Reset hover when switching views
+        if (isMobile) setHovered(false);
     }, [isMobile]);
 
     return (
@@ -46,7 +46,13 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
         >
             {/* Main Card */}
             <motion.div
-                className="w-44 h-44 md:w-52 md:h-52 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-white transition-all duration-300 hover:shadow-[0_0_40px_12px_rgba(138,43,226,0.4)]"
+                className={`
+          w-44 md:w-52 
+          ${isMobile ? "h-auto py-6 px-4" : "h-44 md:h-52"} 
+          rounded-xl bg-white/10 border border-white/20 backdrop-blur-md 
+          shadow-lg flex flex-col items-center justify-center text-white 
+          transition-all duration-300 hover:shadow-[0_0_40px_12px_rgba(138,43,226,0.4)]
+        `}
             >
                 <div className="text-3xl text-purple-500 drop-shadow-[0_0_12px_rgba(138,43,226,0.7)] mb-2">
                     {icon}
@@ -65,8 +71,8 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
                     } z-10`}
             >
                 {hovered && (
-                    <div className="w-40 h-40 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-white text-center">
-                        <div className="text-sm font-semibold bg-gradient-to-r from-white to-purple-500 bg-clip-text text-transparent px-3">
+                    <div className="w-40 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-white text-center py-4 px-3">
+                        <div className="text-sm font-semibold bg-gradient-to-r from-white to-purple-500 bg-clip-text text-transparent">
                             {info}
                         </div>
                     </div>
