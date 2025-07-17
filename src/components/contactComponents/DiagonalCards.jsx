@@ -44,11 +44,10 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
             onMouseLeave={() => !isMobile && setHovered(false)}
             onClick={() => isMobile && setHovered(prev => !prev)}
         >
-            {/* Main Card */}
+            {/* ✅ Fixed Main Card for all views */}
             <motion.div
                 className={`
-          w-44 md:w-52 
-          ${isMobile ? "h-auto py-6 px-4" : "h-44 md:h-52"} 
+          w-44 md:w-52 h-44 md:h-52 
           rounded-xl bg-white/10 border border-white/20 backdrop-blur-md 
           shadow-lg flex flex-col items-center justify-center text-white 
           transition-all duration-300 hover:shadow-[0_0_40px_12px_rgba(138,43,226,0.4)]
@@ -62,7 +61,7 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
                 </div>
             </motion.div>
 
-            {/* Info Card */}
+            {/* ✅ Info Card - Auto height only for info, not main */}
             <motion.div
                 initial={{ opacity: 0, x: 0, y: 0 }}
                 animate={getMotionOffset(direction, hovered, isMobile)}
