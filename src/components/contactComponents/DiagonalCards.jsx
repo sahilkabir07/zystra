@@ -8,7 +8,15 @@ const contactData = [
     { icon: <FaMapMarkerAlt />, label: "Visit Us", info: "Delhi, India", direction: "right" },
 ];
 
-const getMotionOffset = (direction, show) => {
+const getMotionOffset = (direction, show, isMobile) => {
+    if (isMobile) {
+        return {
+            opacity: show ? 1 : 0,
+            y: show ? 10 : 0,
+            x: 0,
+        };
+    }
+
     const base = { opacity: show ? 1 : 0 };
     const offset = 60;
     switch (direction) {
@@ -38,14 +46,13 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
 
     return (
         <div
-            className={`relative group transition-all duration-300 ${isMobile && hovered ? "mb-48" : "mb-6"
-                }`}
+            className="relative group transition-all duration-300 mb-10"
             onMouseEnter={() => !isMobile && setHovered(true)}
             onMouseLeave={() => !isMobile && setHovered(false)}
             onClick={() => isMobile && setHovered(prev => !prev)}
         >
             <motion.div
-                className="w-50 h-50 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-white transition-all duration-300 hover:shadow-[0_0_40px_12px_rgba(138,43,226,0.4)]"
+                className="w-44 h-44 md:w-48 md:h-48 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-white transition-all duration-300 hover:shadow-[0_0_40px_12px_rgba(138,43,226,0.4)]"
             >
                 <div className="text-3xl text-purple-500 drop-shadow-[0_0_12px_rgba(138,43,226,0.7)] mb-2">
                     {icon}
@@ -57,17 +64,15 @@ const DiagonalCard = ({ icon, label, info, direction }) => {
 
             <motion.div
                 initial={{ opacity: 0, x: 0, y: 0 }}
-                animate={getMotionOffset(direction, hovered)}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-10"
+                animate={getMotionOffset(direction, hovered, isMobile)}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className={`absolute ${isMobile ? 'left-1/2 -translate-x-1/2 mt-2' : 'top-full left-1/2 -translate-x-1/2 mt-3'} z-10`}
             >
-                <div
-                    className="w-40 h-40 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-lg flex flex-col items-center justify-center text-white transition-all duration-300 hover:shadow-[0_0_40px_12px_rgba(138,43,226,0.4)]"
-                >
-                    <div className="text-sm font-semibold bg-gradient-to-r from-white to-purple-500 bg-clip-text text-transparent">
+                {hovered && (
+                    <div className="px-4 py-3 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-lg text-white text-sm font-medium text-center w-max max-w-xs whitespace-normal">
                         {info}
                     </div>
-                </div>
+                )}
             </motion.div>
         </div>
     );
